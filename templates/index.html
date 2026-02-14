@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Financial Overview</h1>
+        <p>Your current financial standing at a glance.</p>
+    </div>
+    <div style="display: flex; gap: 1rem;">
+        <a href="/income" class="btn btn-outline">Add Income</a>
+        <a href="/add" class="btn btn-primary">Track Expense</a>
+    </div>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <span class="label">Total Earned</span>
+        <span class="value income">₹ {{ total_earned }}</span>
+    </div>
+    <div class="stat-card">
+        <span class="label">Total Spent</span>
+        <span class="value expense">₹ {{ total_spent }}</span>
+    </div>
+    <div class="stat-card">
+        <span class="label">Current Balance</span>
+        <span class="value" style="color: {{ 'var(--accent)' if balance >= 0 else 'var(--danger)' }}">₹ {{ balance
+            }}</span>
+    </div>
+</div>
+
+<div class="card">
+    <h3 style="margin-bottom: 1.5rem;">Recent Insights</h3>
+    <p style="color: var(--text-secondary); line-height: 1.6; max-width: 600px;">
+        You've tracked your finances across multiple categories. Visit the Analytics tab for a detailed breakdown of
+        your spending habits and to see where you can optimize your budget.
+    </p>
+    <div style="margin-top: 2rem;">
+        <a href="/dashboard" class="btn btn-outline">Analyze Spending Trends</a>
+    </div>
+</div>
+{% endblock %}

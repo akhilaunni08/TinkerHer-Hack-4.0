@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Income Stream</h1>
+        <p>Manage and track your various sources of income.</p>
+    </div>
+</div>
+
+<div class="grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+    <div class="card">
+        <h3 style="margin-bottom: 2rem;">Record Income</h3>
+        <form method="post">
+            <div class="form-group">
+                <label>Amount (₹)</label>
+                <input type="number" name="amount" placeholder="0.00" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label>Source</label>
+                <input type="text" name="source" placeholder="e.g. Salary, Dividend" required>
+            </div>
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" name="date" value="{{ today }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Process Record</button>
+        </form>
+    </div>
+
+    <div class="card" style="padding: 0; overflow: hidden;">
+        <div style="padding: 2rem;">
+            <h3>Recent Earnings</h3>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Source</th>
+                    <th style="text-align: right;">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for income in incomes %}
+                <tr>
+                    <td>{{ income.Date }}</td>
+                    <td>{{ income.Source }}</td>
+                    <td style="text-align: right; font-weight: 600; color: var(--accent);">₹{{ income.Amount }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3" style="text-align: center; padding: 3rem; color: var(--text-muted);">No records
+                        found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartExpense | Professional Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2>SmartExpense</h2>
+        <nav>
+            <a href="/" id="nav-home">Overview</a>
+            <a href="/dashboard" id="nav-dashboard">Analytics</a>
+            <a href="/expenses" id="nav-expenses">Expenses</a>
+            <a href="/income" id="nav-income">Income</a>
+            <a href="/report" id="nav-report">Reports</a>
+        </nav>
+        <div style="margin-top: auto;">
+            <a href="/add" class="btn btn-primary" style="width: 100%;">+ Add Expense</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script>
+        document.querySelectorAll('.sidebar nav a').forEach(link => {
+            if (link.getAttribute('href') === window.location.pathname) {
+                link.classList.add('active');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Financial Reports</h1>
+        <p>Summarized insights of your financial activity.</p>
+    </div>
+    <button class="btn btn-outline" onclick="window.print()">Export Statement</button>
+</div>
+
+<div class="card">
+    <h3 style="margin-bottom: 2rem;">Spending Summary</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th style="text-align: right;">Allocation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in report_data %}
+            <tr>
+                <td>{{ item.category }}</td>
+                <td style="text-align: right; font-weight: 600;">₹{{ item.amount }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="2" style="text-align: center; padding: 4rem; color: var(--text-muted);">
+                    Insufficient data to generate a report.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

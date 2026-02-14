@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Expense Log</h1>
+        <p>A detailed list of all your recorded spending.</p>
+    </div>
+    <a href="/add" class="btn btn-primary">+ New Entry</a>
+</div>
+
+<div class="card" style="padding: 0; overflow: hidden;">
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Notes</th>
+                <th style="text-align: right;">Amount</th>
+                <th style="text-align: right;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td style="font-weight: 500;">{{ expense.date }}</td>
+                <td><span class="tag">{{ expense.category }}</span></td>
+                <td
+                    style="color: var(--text-muted); max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    {{ expense.notes }}
+                </td>
+                <td style="text-align: right; font-weight: 600; color: var(--text-primary);">₹{{ expense.amount }}</td>
+                <td style="text-align: right;">
+                    <a href="/edit/{{ expense.id }}" class="btn btn-danger"
+                        style="color: var(--text-secondary); font-weight: 400;">Edit</a>
+                    <a href="/delete/{{ expense.id }}" class="btn btn-danger"
+                        onclick="return confirm('Archive this entry?')">Delete</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" style="text-align: center; padding: 4rem; color: var(--text-muted);">
+                    No entries found in your expense logs.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
