@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for
 import csv
 import os
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
 from datetime import datetime
 
 app = Flask(__name__)

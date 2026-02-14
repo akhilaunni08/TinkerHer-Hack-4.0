@@ -3,7 +3,7 @@ services:
     name: smart-expense-analytics
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn main:app
+    startCommand: gunicorn app:app
     envVars:
       - key: PORT
         value: 8000
