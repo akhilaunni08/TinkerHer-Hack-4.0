@@ -9,6 +9,8 @@ from datetime import datetime
 app = Flask(__name__)
 EXPENSE_FILE = "data.csv"
 INCOME_FILE = "income.csv"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, "static")
 
 def init_files():
     if not os.path.exists(EXPENSE_FILE):
@@ -161,7 +163,7 @@ def dashboard():
                 textprops={'color':"w"}, colors=['#10B981', '#34D399', '#059669', '#6EE7B7'])
         plt.title("Spending Breakdown", color='w')
         plt.axis('equal')
-        plt.savefig("static/chart.png", transparent=True)
+        plt.savefig(os.path.join(STATIC_DIR, "chart.png"), transparent=True)
         plt.close()
 
     return render_template("dashboard.html", total=total)
